@@ -1,3 +1,16 @@
+/**
+ * This file is Copyright 2012
+ *     Kristian Beres <admin@katropine.net>
+ *
+ * Other copyrights also apply to some parts of this work.  Please
+ * see the individual file headers for details.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.  See the file
+ * COPYING included with this distribution for more information.
+ */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gmailatom.h"
@@ -92,25 +105,26 @@ void MainWindow::result(QNetworkReply *reply){
             }
         }
         QFont font;
-        font.setBold(false);
+
         font.setPixelSize(11);
 
         foreach(int i, map.keys()){
-
+            font.setBold(false);
             QCommandLinkButton* buttonEmail = new QCommandLinkButton(this);
-            buttonEmail->setFont(font);
-            buttonEmail->setToolTip("Requires that you are logged in Gmail");
-            buttonEmail->setMinimumHeight(61);
-            buttonEmail->setMaximumWidth(270);
             Email em = map[i];
 
             buttonEmail->setObjectName(em.getLink());
             buttonEmail->setText(em.__toString());
             if(i == 0){
+                font.setBold(true);
                 buttonEmail->setIcon(QIcon(":/images/gmailred.png"));
             }else{
                 buttonEmail->setIcon(QIcon(":/images/gmailblue.png"));
             }
+            buttonEmail->setToolTip("Requires that you are logged in Gmail");
+            buttonEmail->setMinimumHeight(61);
+            buttonEmail->setMaximumWidth(270);
+            buttonEmail->setFont(font);
             connect(buttonEmail, SIGNAL(clicked()), pSignalMapper, SLOT(map()));
 
 

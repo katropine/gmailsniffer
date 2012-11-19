@@ -186,7 +186,6 @@ QByteArray SimpleCrypt::decryptToByteArray(QByteArray cypher)
     QByteArray ba = cypher;
 
     char version = ba.at(0);
-
     if (version !=3) {  //we only work with version 3
         m_lastError = ErrorUnknownVersion;
         qWarning() << "Invalid version or not a cyphertext.";

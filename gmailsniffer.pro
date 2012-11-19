@@ -39,3 +39,6 @@ FORMS    += \
 
 RESOURCES += \
     systrey.qrc
+
+OTHER_FILES += \
+    COPYING.txt
