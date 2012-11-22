@@ -1,16 +1,16 @@
 /**
- * This file is Copyright 2012
- *     Kristian Beres <admin@katropine.net>
- *
- * Other copyrights also apply to some parts of this work.  Please
- * see the individual file headers for details.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.  See the file
- * COPYING included with this distribution for more information.
- */
+* This file is Copyright 2012
+* Kristian Beres <admin@katropine.net>
+*
+* Other copyrights also apply to some parts of this work. Please
+* see the individual file headers for details.
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License as
+* published by the Free Software Foundation; either version 2 of the
+* License, or (at your option) any later version. See the file
+* COPYING included with this distribution for more information.
+*/
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "gmailatom.h"
@@ -38,12 +38,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->createTrayIcon();
 
     /**
-     * Setting Button
-     */
+    * Setting Button
+    */
     QFont font;
     font.setPixelSize(9);
 
-    pSettingsBtn= new  QPushButton("Settings");
+    pSettingsBtn= new QPushButton("Settings");
     pSettingsBtn->setMaximumHeight(20);
     pSettingsBtn->setMaximumWidth(50);
     pSettingsBtn->setFont(font);
@@ -52,23 +52,26 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 
     /**
-     * Load Gmail
-     */
+    * Load Gmail
+    */
     Settings settings;
-    this->load();
+
     pTimer = new QTimer(this);
     connect(pTimer, SIGNAL(timeout()), this, SLOT(load()));
     int refreshEvery = settings.getRefreshTime() * 1000;
     pTimer->start(refreshEvery);
     qDebug() << refreshEvery;
+    this->load();
 }
 
 void MainWindow::load(){
     qDebug() << "Timer fired";
+    pTimer->stop();
 
     pNetworkManager = new QNetworkAccessManager(this);
 
     connect(pNetworkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(result(QNetworkReply*)));
+    connect(pNetworkManager, SIGNAL(finished(QNetworkReply*)), pTimer, SLOT(start()));
 
     /**
      * load settings
@@ -86,10 +89,9 @@ void MainWindow::result(QNetworkReply *reply){
     qDebug() << "reply: ";
 
     if(reply->error() > 0){
-        pTimer->stop();
-        QMessageBox::information(this, "Oooopsss!","Could not connect to gmail.com. Possible wrong username or password.\n\n Try entering Your data again.");
+        //QMessageBox::information(this, "Oooopsss!","Could not connect to gmail.com. Possible wrong username or password.\n\n Try entering Your data again.");
         qDebug() << reply->errorString();
-
+        ui->statusbar->showMessage("Could not connect");
     }else{
         GmailAtom gmailAtom = GmailAtom(reply);
         QMap<int, Email> map = gmailAtom.fetch();
@@ -175,13 +177,14 @@ void MainWindow::result(QNetworkReply *reply){
         ui->statusbar->showMessage(msg);
 
         /**
-         * !important
-         */
+        * !important
+        */
         reply->deleteLater();
         reply->close();
+        pNetworkManager->disconnect();
         pNetworkManager->deleteLater();
         map.clear();
-
+        pTimer->start();
         qDebug() << "Request successful!";
     }
 
@@ -304,9 +307,9 @@ void MainWindow::trayActivation(QSystemTrayIcon::ActivationReason reason){
 }
 
 /**
- * @brief MainWindow::closeEvent override
- * @param event
- */
+* @brief MainWindow::closeEvent override
+* @param event
+*/
 void MainWindow::closeEvent(QCloseEvent *event) {
     qDebug() << "closed";
     this->hideSniffer();

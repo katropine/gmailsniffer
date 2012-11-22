@@ -53,40 +53,38 @@ DialogSettings::DialogSettings(QWidget *parent) :
 
 }
 
+void DialogSettings::on_btnOk_clicked(){
+    qDebug() << "OK button";
+    Settings settings;
+    if(!ui->userNameInput->text().isEmpty()){
+        settings.setUserName(ui->userNameInput->text());
+        settings.setPassword(ui->passwordInput->text());
 
-void DialogSettings::on_buttonBox_clicked(QAbstractButton *button)
-{
-    if(button->text() == "OK"){
-        qDebug() << "OK button";
-        Settings settings;
-        if(!ui->userNameInput->text().isEmpty()){
-            settings.setUserName(ui->userNameInput->text());
-            settings.setPassword(ui->passwordInput->text());
-
-        }
-
-        QString browserCmd = settings.fetchBrowserCommand(ui->comboBoxBrowsers->currentIndex());
-        settings.setBrowserCmd(browserCmd);
-        settings.setBrowser(ui->comboBoxBrowsers->currentIndex());
-        settings.setRefreshTime(ui->spinBoxRefresh->value());
-        //notifier
-        settings.setPositoinX(ui->notifyPositionX->value());
-        settings.setPositoinY(ui->notifyPositionY->value());
-        settings.setWidth(ui->notifyWidth->value());
-        settings.setHeight(ui->notifyHeight->value());
-        settings.setDuration(ui->notifyDuration->value());
-        settings.setSystemNotifier(ui->chkSystemNotifier->isChecked());
-
-        settings.save();
-
-        // reload parent settings
-        connect(this, SIGNAL(destroyed()), this->parentWidget(), SLOT(load()));
-    }else{
-        qDebug() << "Cancel button";
-        //this->loadSettings();
     }
+
+    QString browserCmd = settings.fetchBrowserCommand(ui->comboBoxBrowsers->currentIndex());
+    settings.setBrowserCmd(browserCmd);
+    settings.setBrowser(ui->comboBoxBrowsers->currentIndex());
+    settings.setRefreshTime(ui->spinBoxRefresh->value());
+    //notifier
+    settings.setPositoinX(ui->notifyPositionX->value());
+    settings.setPositoinY(ui->notifyPositionY->value());
+    settings.setWidth(ui->notifyWidth->value());
+    settings.setHeight(ui->notifyHeight->value());
+    settings.setDuration(ui->notifyDuration->value());
+    settings.setSystemNotifier(ui->chkSystemNotifier->isChecked());
+
+    settings.save();
+
+    // reload parent settings
+    connect(this, SIGNAL(destroyed()), this->parentWidget(), SLOT(load()));
+    this->close();
 }
 
+void DialogSettings::on_btnCancel_clicked()
+{
+    this->close();
+}
 
 void DialogSettings::on_pushButton_clicked()
 {
