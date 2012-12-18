@@ -9,6 +9,9 @@ INSTALL
 ============
 
 gmake
+
 make
+
 make install
+
 cp images/gmailsniffer.png /usr/share/icons/gmailsniffer.png & cp gmail /usr/bin/gmailsniffer 
