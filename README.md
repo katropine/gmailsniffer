@@ -8,7 +8,7 @@ Tested od LMDE, Mint 14, Fedora 17. KDE, MATE, Cinnamon
 INSTALL
 ============
 
-gmake
+qmake
 
 make
 
