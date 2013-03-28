@@ -146,6 +146,10 @@ void MainWindow::result(QNetworkReply *reply){
                 message.append("\" \"<br>");
                 message.append(newEm.getTitle());
                 message.append("\" -i /usr/share/icons/gmailsniffer.png");
+                // Play sound
+                Phonon::MediaObject *alertSound = Phonon::createPlayer(Phonon::MusicCategory , Phonon::MediaSource("/usr/share/sounds/gmailsniffer-newemail.wav") );
+                alertSound->play();
+
                 system(message.toUtf8());
             }else{
                 pNotifier = new SnifferNotifier(this);
@@ -316,6 +320,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 }
 
 MainWindow::~MainWindow(){
+    delete alertSound;
     delete pNotifier;
     delete trayIcon;
     delete trayIconMenu;

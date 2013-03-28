@@ -29,6 +29,8 @@
 #include "dialogsettings.h"
 #include "sniffernotifier.h"
 #include "aboutsniffer.h"
+#include <phonon/MediaObject>
+#include <phonon/MediaSource>
 
 namespace Ui {
 class MainWindow;
@@ -65,6 +67,8 @@ private:
     QAction *settingsAction;
 
     SnifferNotifier *pNotifier;
+
+    Phonon::MediaObject *alertSound;
 
     int emailCount;
 
