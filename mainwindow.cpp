@@ -147,7 +147,7 @@ void MainWindow::result(QNetworkReply *reply){
                 message.append(newEm.getTitle());
                 message.append("\" -i /usr/share/icons/gmailsniffer.png");
                 // Play sound
-                Phonon::MediaObject *alertSound = Phonon::createPlayer(Phonon::MusicCategory , Phonon::MediaSource("/usr/share/sounds/gmailsniffer-newemail.wav") );
+                Phonon::MediaObject *alertSound = Phonon::createPlayer(Phonon::MusicCategory , Phonon::MediaSource("/usr/share/sounds/gmailsniffer-newemail.ogg") );
                 alertSound->play();
 
                 system(message.toUtf8());

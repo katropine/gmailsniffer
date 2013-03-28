@@ -18,6 +18,8 @@
 #include <QAbstractButton>
 #include "mainwindow.h"
 #include "sniffernotifier.h"
+#include <phonon/MediaObject>
+#include <phonon/MediaSource>
 
 namespace Ui {
 class DialogSettings;
@@ -42,6 +44,7 @@ private slots:
 private:
     Ui::DialogSettings *ui;
     SnifferNotifier *pNotifyTest;
+    Phonon::MediaObject *alertSound;
 
 };
 

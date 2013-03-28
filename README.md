@@ -14,4 +14,4 @@ make
 
 make install
 
-sudo cp images/gmailsniffer.png /usr/share/icons/gmailsniffer.png & cp gmail /usr/bin/gmailsniffer & cp res/gmailsniffer-newemail.wav /usr/share/sounds/gmailsniffer-newemail.wav
+sudo cp images/gmailsniffer.png /usr/share/icons/gmailsniffer.png & cp gmail /usr/bin/gmailsniffer & cp res/gmailsniffer-newemail.wav /usr/share/sounds/gmailsniffer-newemail.ogg

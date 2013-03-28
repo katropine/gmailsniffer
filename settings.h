@@ -38,6 +38,7 @@ public:
     void setSnifferPosition(QRect rect);
     void setRefreshTime(int seconds);
     void setSystemNotifier(bool sysNotify);
+    void setAlertSound(bool alertSound);
 
     QString getUserName();
     QString getPassword();
@@ -51,6 +52,7 @@ public:
     int getRefreshTime();
     QRect getSnifferPosition();
     bool getSystemNotifier();
+    bool getAlertSound();
 
 protected:
     QString userName;
@@ -65,6 +67,7 @@ protected:
     int seconds;
     QRect snifferPosition;
     bool sysNotify;
+    bool alertSound;
 
 private:
     QSettings *pSettings;

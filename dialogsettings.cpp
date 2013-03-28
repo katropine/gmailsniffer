@@ -45,6 +45,9 @@ DialogSettings::DialogSettings(QWidget *parent) :
         ui->chkSystemNotifier->setChecked(true);
         qDebug() << "is checked";
     }
+    if(settings.getAlertSound()){
+        ui->chkSoundAlert->setChecked(true);
+    }
 
 
     //browser
@@ -73,7 +76,7 @@ void DialogSettings::on_btnOk_clicked(){
     settings.setHeight(ui->notifyHeight->value());
     settings.setDuration(ui->notifyDuration->value());
     settings.setSystemNotifier(ui->chkSystemNotifier->isChecked());
-
+    settings.setAlertSound(ui->chkSoundAlert->isChecked());
     settings.save();
 
     // reload parent settings
@@ -96,6 +99,11 @@ void DialogSettings::on_pushButton_clicked()
         message.append("\" \"<br>");
         message.append("Test notify message");
         message.append("\" -i /usr/share/icons/hicolor/256x256/apps/gmailsniffer.png");
+        if(ui->chkSoundAlert->isChecked()){
+            // Play sound
+            Phonon::MediaObject *alertSound = Phonon::createPlayer(Phonon::MusicCategory , Phonon::MediaSource("/usr/share/sounds/gmailsniffer-newemail.ogg") );
+            alertSound->play();
+        }
         system(message.toUtf8());
     }else{
         int x = ui->notifyPositionX->value();
@@ -113,4 +121,5 @@ void DialogSettings::on_pushButton_clicked()
 DialogSettings::~DialogSettings()
 {
     delete ui;
+    Phonon::MediaObject *alertSound;
 }

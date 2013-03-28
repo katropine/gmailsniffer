@@ -44,6 +44,7 @@ Settings::Settings(){
 
     pSettings->beginGroup("Notifiction");
     this->setSystemNotifier(pSettings->value("use_sys_notification").toBool());
+    this->setAlertSound(pSettings->value("use_alert_sound").toBool());
     this->setPositoinX(pSettings->value("position_x").toInt());
     this->setPositoinY(pSettings->value("position_y").toInt());
     this->setWidth(pSettings->value("width").toInt());
@@ -102,6 +103,10 @@ void Settings::setSnifferPosition(QRect rect){
 void Settings::setSystemNotifier(bool sysNotify){
     this->sysNotify = sysNotify;
 }
+void Settings::setAlertSound(bool alertSound){
+    this->alertSound = alertSound;
+}
+
 
 QString Settings::getUserName(){
     return this->userName;
@@ -147,6 +152,9 @@ QRect Settings::getSnifferPosition(){
 bool Settings::getSystemNotifier(){
     return this->sysNotify;
 }
+bool Settings::getAlertSound(){
+    return this->alertSound;
+}
 
 void Settings::save(){
     pSettings->beginGroup("User");
@@ -167,6 +175,7 @@ void Settings::save(){
 
     pSettings->beginGroup("Notifiction");
     pSettings->setValue("use_sys_notification", this->sysNotify);
+    pSettings->setValue("use_alert_sound", this->alertSound);
     pSettings->setValue("position_x", this->positionX);
     pSettings->setValue("position_y", this->positionY);
     pSettings->setValue("width",this->width);
