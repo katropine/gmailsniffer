@@ -5,6 +5,13 @@ QT4 application that checks unread google emails, if any it will show a popup no
 
 Tested od LMDE, Mint 14, Fedora 17. KDE, MATE, Cinnamon
 
+
+REQUIREMENTS
+============
+libphonon-dev
+
+
+
 INSTALL
 ============
 
