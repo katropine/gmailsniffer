@@ -78,7 +78,7 @@ void MainWindow::load(){
      */
     Settings settings;
 
-    QUrl url("https://mail.google.com/mail/feed/atom");
+    QUrl url("https://mail.google.com/mail/feed/atom/unread");
     url.setUserName(settings.getUserName());
     url.setPassword(settings.getPassword());
 

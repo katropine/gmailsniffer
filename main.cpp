@@ -14,7 +14,7 @@
 #include <QApplication>
 #include "mainwindow.h"
 
-extern const QString  VERSION = "1.3";
+extern const QString  VERSION = "1.3.1";
 
 int main(int argc, char *argv[])
 {
