@@ -1,6 +1,6 @@
 /**
  * This file is Copyright 2012
- *     Kristian Beres <admin@katropine.net>
+ *     Kristian Beres <admin@katropine.com>
  *
  * Other copyrights also apply to some parts of this work.  Please
  * see the individual file headers for details.
@@ -24,7 +24,7 @@
     <id>tag:gmail.google.com,2004:1414091358027121800</id>
     <author>
         <name>ivanka</name>
-        <email>ivanka@planetsg.com</email>
+        <email>ivanka@test.com</email>
     </author>
  </entry>
 */
