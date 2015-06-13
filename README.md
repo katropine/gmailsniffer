@@ -9,6 +9,7 @@ GmailSniffer is a Gmail Notifier for linux, written in QT4, it checks unread gma
 - can assign default browser
 - can set email check interval
 
+NOTE: As of June 2015 GmailSniffer works only with Gmail accounts set to 2-step verification. 
 
 Tested od LMDE, Mint 14, Fedora 17. KDE, MATE, Cinnamon
 
@@ -16,7 +17,6 @@ Tested od LMDE, Mint 14, Fedora 17. KDE, MATE, Cinnamon
 REQUIREMENTS
 ============
 libphonon-dev
-
 
 
 INSTALL
